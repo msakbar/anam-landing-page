@@ -1,5 +1,11 @@
 ---
-const services = [
+interface Service {
+  name: string;
+  description: string;
+  icon: 'zoho' | 'salesforce' | 'float';
+}
+
+const services: Service[] = [
   { 
     name: 'Zoho Implementation', 
     description: 'Streamline your business processes with Zoho suite',
@@ -19,6 +25,7 @@ const services = [
 
 import Icon from './Icon.astro';
 ---
+
 <section id="services" class="py-20 bg-gray-100">
   <div class="container mx-auto px-6">
     <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
@@ -35,9 +42,3 @@ import Icon from './Icon.astro';
     </div>
   </div>
 </section>
-
-<style>
-  .hover\:scale-110:hover {
-    transform: scale(1.1);
-  }
-</style>
