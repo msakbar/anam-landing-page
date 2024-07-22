@@ -29,49 +29,52 @@
 </section>
 
 <script>
-  const form = document.getElementById('contactForm');
+  const form = document.getElementById('contactForm') as HTMLFormElement;
   const formStatus = document.getElementById('formStatus');
   const statusMessage = document.getElementById('statusMessage');
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    // Disable submit button and show loading state
-    const submitButton = form.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-    submitButton.textContent = 'Sending...';
-
-    const formData = new FormData(form);
-    
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        body: formData
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        statusMessage.textContent = 'Message sent successfully!';
-        statusMessage.className = 'text-green-600';
-        form.reset();
-      } else {
-        statusMessage.textContent = 'Error sending message. Please try again.';
-        statusMessage.className = 'text-red-600';
+  if (form && formStatus && statusMessage) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
       }
-    } catch (error) {
-      statusMessage.textContent = 'An unexpected error occurred. Please try again later.';
-      statusMessage.className = 'text-red-600';
-    } finally {
-      // Re-enable submit button and show status
-      submitButton.disabled = false;
-      submitButton.textContent = 'Send Message';
-      formStatus.classList.remove('hidden');
 
-      // Hide status message after 5 seconds
-      setTimeout(() => {
-        formStatus.classList.add('hidden');
-      }, 5000);
-    }
-  });
+      const formData = new FormData(form);
+      
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          statusMessage.textContent = 'Message sent successfully!';
+          statusMessage.className = 'text-green-600';
+          form.reset();
+        } else {
+          statusMessage.textContent = 'Error sending message. Please try again.';
+          statusMessage.className = 'text-red-600';
+        }
+      } catch (error) {
+        statusMessage.textContent = 'An unexpected error occurred. Please try again later.';
+        statusMessage.className = 'text-red-600';
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Send Message';
+        }
+        formStatus.classList.remove('hidden');
+
+        setTimeout(() => {
+          formStatus.classList.add('hidden');
+        }, 5000);
+      }
+    });
+  }
 </script>
