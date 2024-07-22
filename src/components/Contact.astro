@@ -1,0 +1,77 @@
+---
+---
+<section id="contact" class="py-20 bg-gray-100">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
+    <form class="max-w-lg mx-auto" id="contactForm">
+      <div class="mb-4">
+        <label for="name" class="block mb-2">Name</label>
+        <input type="text" id="name" name="name" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block mb-2">Email</label>
+        <input type="email" id="email" name="email" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-4">
+        <label for="message" class="block mb-2">Message</label>
+        <textarea id="message" name="message" rows="4" class="w-full p-2 border rounded" required></textarea>
+      </div>
+      <div class="mb-4 hidden">
+        <label for="honeypot" class="sr-only">Leave this field empty</label>
+        <input type="text" id="honeypot" name="honeypot">
+      </div>
+      <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-full text-lg font-semibold hover:bg-blue-700">Send Message</button>
+    </form>
+    <div id="formStatus" class="mt-4 text-center hidden">
+      <p id="statusMessage"></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+  const statusMessage = document.getElementById('statusMessage');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Disable submit button and show loading state
+    const submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        statusMessage.textContent = 'Message sent successfully!';
+        statusMessage.className = 'text-green-600';
+        form.reset();
+      } else {
+        statusMessage.textContent = 'Error sending message. Please try again.';
+        statusMessage.className = 'text-red-600';
+      }
+    } catch (error) {
+      statusMessage.textContent = 'An unexpected error occurred. Please try again later.';
+      statusMessage.className = 'text-red-600';
+    } finally {
+      // Re-enable submit button and show status
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send Message';
+      formStatus.classList.remove('hidden');
+
+      // Hide status message after 5 seconds
+      setTimeout(() => {
+        formStatus.classList.add('hidden');
+      }, 5000);
+    }
+  });
+</script>

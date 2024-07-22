@@ -1,0 +1,24 @@
+---
+export interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+
+const icons = {
+  zoho: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <path d="M256 32C132.3 32 32 132.3 32 256s100.3 224 224 224 224-100.3 224-224S379.7 32 256 32zm105.6 320h-211.2l105.6-182.9L361.6 352z" fill="#3B82F6"/>
+  </svg>`,
+  salesforce: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <path d="M404.5 373.6c-26.1 0-49.9-9.9-67.9-26.1-18 16.2-41.8 26.1-67.9 26.1-26.1 0-49.9-9.9-67.9-26.1-18 16.2-41.8 26.1-67.9 26.1-55.8 0-101.1-45.3-101.1-101.1s45.3-101.1 101.1-101.1c26.1 0 49.9 9.9 67.9 26.1 18-16.2 41.8-26.1 67.9-26.1 26.1 0 49.9 9.9 67.9 26.1 18-16.2 41.8-26.1 67.9-26.1 55.8 0 101.1 45.3 101.1 101.1s-45.3 101.1-101.1 101.1z" fill="#2563EB"/>
+  </svg>`,
+  float: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="15%" fill="#1D4ED8"/>
+    <path d="M109 109h294v294H109z" fill="#fff"/>
+    <path d="M229 229h74v74h-74z" fill="#1D4ED8"/>
+  </svg>`
+};
+---
+
+<span class={className} set:html={icons[name]} />
