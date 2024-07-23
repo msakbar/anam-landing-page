@@ -1,29 +1,27 @@
 ---
-import { Image } from 'astro:assets';
-import logoSVG from '../assets/logo.svg?raw';  // Import SVG as raw string
-import { Icon } from 'astro-icon';
+import logoImage from '../assets/company_logo.svg';
 ---
 
 <header class="bg-white shadow-sm">
   <nav class="container mx-auto px-6 py-3">
     <div class="flex justify-between items-center">
       <div class="flex items-center">
-        <!-- Use the SVG as an inline element -->
-        <span class="h-10 w-auto" set:html={logoSVG} />
+        <img src={logoImage} alt="Anam Mazhar Logo" class="h-10 w-auto" />
       </div>
-      <div class="hidden md:flex">
+      <div >
         <a href="#services" class="text-gray-800 hover:text-blue-600 px-3 py-2">Services</a>
         <a href="#about" class="text-gray-800 hover:text-blue-600 px-3 py-2">About</a>
         <a href="#contact" class="text-gray-800 hover:text-blue-600 px-3 py-2">Contact</a>
       </div>
-      <button id="menu-toggle" class="md:hidden">
-        <Icon name="mdi:menu" class="w-6 h-6" />
-      </button>
     </div>
   </nav>
-  <!-- Mobile menu (unchanged) -->
 </header>
 
 <script>
-  // Your existing script
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
 </script>

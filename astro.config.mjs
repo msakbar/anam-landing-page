@@ -5,7 +5,6 @@ export default defineConfig({
   output: 'server',
   adapter: vercel(),
   integrations: [
-    // Add any other integrations you're using here
   ],
   image: {
     service: {
