@@ -13,7 +13,9 @@ const $$Layout = createComponent(($$result, $$props, $$slots) => {
 }, "/Users/shehzad/Documents/code/implementation_specialist/landing-page/src/layouts/Layout.astro", void 0);
 
 const $$Header = createComponent(($$result, $$props, $$slots) => {
-  return renderTemplate`${maybeRenderHead()}<header class="bg-white shadow-sm"> <nav class="container mx-auto px-6 py-3"> <div class="flex justify-between items-center"> <div class="text-xl font-bold">Your Company Name</div> <div> <a href="#services" class="text-gray-800 hover:text-blue-600 px-3 py-2">Services</a> <a href="#about" class="text-gray-800 hover:text-blue-600 px-3 py-2">About</a> <a href="#contact" class="text-gray-800 hover:text-blue-600 px-3 py-2">Contact</a> </div> </div> </nav> </header>`;
+  return renderTemplate`${maybeRenderHead()}<header class="bg-white shadow-sm"> <nav class="container mx-auto px-6 py-3"> <div class="flex justify-between items-center"> <div class="flex items-center">
+Anam Mazhar
+</div> <div> <a href="#services" class="text-gray-800 hover:text-blue-600 px-3 py-2">Services</a> <a href="#about" class="text-gray-800 hover:text-blue-600 px-3 py-2">About</a> <a href="#contact" class="text-gray-800 hover:text-blue-600 px-3 py-2">Contact</a> </div> </div> </nav> </header> `;
 }, "/Users/shehzad/Documents/code/implementation_specialist/landing-page/src/components/Header.astro", void 0);
 
 const teamMeetingImage = new Proxy({"src":"/_astro/team-meeting.DmeBOUfr.jpg","width":5551,"height":3701,"format":"jpg"}, {
